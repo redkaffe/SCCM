@@ -1,0 +1,131 @@
+This script is a work in progress!!!
+
+It is used to integrate quickly a bunch of applications into SCCM, and build a few Deployment Types (DTs) for each application if needed.
+
+It is meant to use MSI files ONLY...I'm lazy so I wanted to be able to build a demo lab quickly with latest versions of client's apps...
+
+I'll try to add more intelligence to it when i have the time, typically i want to add REQUIREMENTS to the DTs to force non 'Common' DTs to be picked by the apropriate OSes.
+
+Disclaimer: Use it at your own risk, tests have been done but to the extend of my lab, so you know...If you brake anything, don't blame me!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Step 1: download your sources MSIs and arrange them in the proper (expected) manner:
+DIR1 : Sources_Apps
+------DIR2 : App1Name (used if no x86/x64 specs, will be used for a DT called 'Common')
+--------------DIR3: x86 (contains x86 msi, will be used for x86 DT)
+--------------DIR3: x64 (contains x64 msi, will be used for x64 DT)
+------DIR2 : App2Name (used if no x86/x64 specs, will be used for a DT called 'Common')
+--------------DIR3: x86 (contains x86 msi, will be used for x86 DT)
+--------------DIR3: x64 (contains x64 msi, will be used for x64 DT)
+And so ON...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Step 2: References needed for the script modifications
+
+
+
+in my example: 
+HOSTNAME = CM01 (Site server for "RK1" SCCM SITE)
+Physical drive containing DIR1: S:\SRC\APPs\Sources_Apps (locally on CM SITE Server)
+Network Accessible Share for DIR1: \\CM01\SRC\APPS\Sources_Apps (used for package content)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Step 3: Edit the script to include: 
+-SITENAME (here "RK1")
+-Sources for Apps repository (here: "S:\SRC\APPs\Sources_Apps")
+-UNC Share for Apps Sources (here "\\CM01\SRC\APPS\Sources_Apps")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Step 4: Launch the script from elevated PS Prompt
+...and watch it go thru the dirs and create APPs and their DTs.
+
+
+
+
+
+
+
+
+
+
+Please send me any feedback!
+
+the script goes thru the directories, get the MSI info from the source and populates the "Application" accordingly (thanks to David O'Brien et Nickolaj Andersen!!!)
+visit their sites:
+## http://www.scconfigmgr.com/2014/08/22/how-to-get-msi-file-information-with-powershell/  
+
+## https://david-obrien.net/2013/07/create-new-configmgr-applications-from-script-with-powershell/
+
+AND FEEL FREE TO GIVE ME FEEDBACK, if anything at all needs improvement, please send me your ideas, problems...and any improvements:)
+
+OK, done!
+20 Apps in under 5 minutes...Cool no?
+
+thanks for your time:)
+
+
+
+
+
+Pierre Emmanuel JOUBERT.
+http://www.redkaffe.com
+@red_kaffe
+pierre@redkaffe.com
