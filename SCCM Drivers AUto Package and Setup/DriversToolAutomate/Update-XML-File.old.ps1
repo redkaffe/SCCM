@@ -1,0 +1,1 @@
+﻿Get-WmiObject -Class sms_package -Namespace root\sms\site_CAS | Select-Object Name, PackageID | where Name -Like 'Drivers -*' | Export-Clixml -Path '\\ecm.era\pkg_source\OSD\DynamicDriverPackages\OSD-Get-DynamicPackage\Packages.xml' -force
